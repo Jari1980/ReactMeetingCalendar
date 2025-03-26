@@ -16,7 +16,7 @@ const MeetingsTable = () => {
   
 
   return (
-    <div>
+    <div className="container d-flex justify-content-center">
       <Table striped bordered hover variant="dark">
         <thead>
           <tr>

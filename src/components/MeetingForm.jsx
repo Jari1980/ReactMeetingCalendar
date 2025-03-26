@@ -7,7 +7,7 @@ import meetingLevel from "../assets/data/meetingLevel";
 const MeetingForm = () => {
   const { scheduledMeetings, setMeetings } = useMeetingContext();
   const [counter, setCounter] = useState(2);
-  const [input, setInput] = useState({});
+
 
   const {
     register,
@@ -19,13 +19,14 @@ const MeetingForm = () => {
     console.log("Meeting Form Data:", data);
     setMeetings([...scheduledMeetings, {id: counter, title: data.title, date: data.date, time: data.time, level: data.level, participants: data.participants, description: data.description}])
     setCounter(counter + 1)
+    
     //alert("Meeting is submitted");
   };
 
   
   return (
     <div className="container mt-5 d-flex justify-content-center">
-      <div className="p-4 border rounded bg-light">
+      <div className="p-4 border rounded bg-secondary">
         <h1 className="text-center mb-4">Schedule a new meeting</h1>
         <form onSubmit={handleSubmit(onSubmit)} className="row g-3">
           <div className="col-12">
@@ -112,7 +113,7 @@ const MeetingForm = () => {
             <label htmlFor="description" className="form-label">
               Description
             </label>
-            <input
+            <textarea
               id="description"
               className={`form-control ${errors.description ? "is-invalid" : ""}`}
               {...register("description")}
