@@ -7,7 +7,7 @@ import { useMeetingContext } from "./context";
 const MeetingsTable = () => {
   const { scheduledMeetings, setMeetings } = useMeetingContext();
 
-  console.log(scheduledMeetings)
+  //console.log(scheduledMeetings)
   
 
   return (
