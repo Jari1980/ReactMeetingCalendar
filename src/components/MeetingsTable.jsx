@@ -8,6 +8,11 @@ const MeetingsTable = () => {
   const { scheduledMeetings, setMeetings } = useMeetingContext();
 
   //console.log(scheduledMeetings)
+
+  function deleteMeeting(id) {
+    let filtered = scheduledMeetings.filter(element => element.id !== id)
+    setMeetings(filtered)
+  }
   
 
   return (
@@ -34,7 +39,7 @@ const MeetingsTable = () => {
               <td>{item.level}</td>
               <td>
                 <Button>Edit</Button>
-                <Button>Delete</Button>
+                <Button onClick={() => deleteMeeting(item.id)}>Delete</Button>
               </td>
             </tr>
           </tbody>
