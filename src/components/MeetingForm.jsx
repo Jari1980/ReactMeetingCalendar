@@ -19,7 +19,7 @@ const MeetingForm = () => {
     console.log("Meeting Form Data:", data);
     setMeetings([...scheduledMeetings, {id: counter, title: data.title, date: data.date, time: data.time, level: data.level, participants: data.participants, description: data.description}])
     setCounter(counter + 1)
-    alert("Meeting is submitted");
+    //alert("Meeting is submitted");
   };
 
   
