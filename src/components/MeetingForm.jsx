@@ -3,27 +3,52 @@ import { useMeetingContext } from "./context";
 import { useForm } from "react-hook-form";
 import meetingLevel from "../assets/data/meetingLevel";
 
-
 const MeetingForm = () => {
   const { scheduledMeetings, setMeetings } = useMeetingContext();
   const [counter, setCounter] = useState(2);
 
-
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      title: "",
+      date: "",
+      time: "",
+      level: "",
+      participants: "",
+      description: "",
+    },
+  });
 
   const onSubmit = (data) => {
     console.log("Meeting Form Data:", data);
-    setMeetings([...scheduledMeetings, {id: counter, title: data.title, date: data.date, time: data.time, level: data.level, participants: data.participants, description: data.description}])
-    setCounter(counter + 1)
-    
+    setMeetings([
+      ...scheduledMeetings,
+      {
+        id: counter,
+        title: data.title,
+        date: data.date,
+        time: data.time,
+        level: data.level,
+        participants: data.participants,
+        description: data.description,
+      },
+    ]);
+    setCounter(counter + 1);
+    reset({
+      title: "",
+      date: "",
+      time: "",
+      level: "",
+      participants: "",
+      description: "",
+    });
     //alert("Meeting is submitted");
   };
 
-  
   return (
     <div className="container mt-5 d-flex justify-content-center">
       <div className="p-4 border rounded bg-secondary">
@@ -101,11 +126,15 @@ const MeetingForm = () => {
             </label>
             <input
               id="participants"
-              className={`form-control ${errors.participants ? "is-invalid" : ""}`}
+              className={`form-control ${
+                errors.participants ? "is-invalid" : ""
+              }`}
               {...register("participants")}
             />
             {errors.participants && (
-              <div className="invalid-feedback">{errors.participants.message}</div>
+              <div className="invalid-feedback">
+                {errors.participants.message}
+              </div>
             )}
           </div>
 
@@ -115,13 +144,15 @@ const MeetingForm = () => {
             </label>
             <textarea
               id="description"
-              className={`form-control ${errors.description ? "is-invalid" : ""}`}
+              className={`form-control ${
+                errors.description ? "is-invalid" : ""
+              }`}
               {...register("description")}
-              
-              
             />
             {errors.description && (
-              <div className="invalid-feedback">{errors.description.message}</div>
+              <div className="invalid-feedback">
+                {errors.description.message}
+              </div>
             )}
           </div>
 
