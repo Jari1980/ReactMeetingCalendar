@@ -7,7 +7,7 @@ const meetings = [
         title: "Sing Broccoli songs",
         date: "2025-03-26",
         time: "12:00",
-        level: meetingLevel.at(1).name,
+        level: meetingLevel[0].name,
         participants: "test1@test1.com, test2@test2.com",
         description: "Test meeting 1"
     },
@@ -16,7 +16,7 @@ const meetings = [
         title: "Dota 2 play time",
         date: "2025-03-26",
         time: "17:00",
-        level: meetingLevel.at(3).name,
+        level: meetingLevel[3].name,
         participants: "test1@test1.com, test2@test2.com",
         description: "Test meeting 2"
     },
