@@ -6,14 +6,19 @@ import { useMeetingContext } from "./context";
 
 const MeetingsTable = () => {
   const { scheduledMeetings, setMeetings } = useMeetingContext();
+  const { uppdateMeeting, setUppdateMeeting } = useMeetingContext();
 
-  //console.log(scheduledMeetings)
 
   function deleteMeeting(id) {
     let filtered = scheduledMeetings.filter(element => element.id !== id)
     setMeetings(filtered)
   }
   
+  function editMeeting(id){
+    let meeting = scheduledMeetings.filter(element => element.id === id)
+    console.log(meeting)
+    setUppdateMeeting({uppdate: true, id: meeting[0].id, title: meeting[0].title, date: meeting[0].date, time: meeting[0].time, level: meeting[0].level, participants: meeting[0].participants, description: meeting[0].description})
+  }
 
   return (
     <div className="container d-flex justify-content-center">
@@ -38,7 +43,7 @@ const MeetingsTable = () => {
               <td>{item.time}</td>
               <td>{item.level}</td>
               <td>
-                <Button>Edit</Button>
+                <Button onClick={() => editMeeting(item.id)}>Edit</Button>
                 <Button onClick={() => deleteMeeting(item.id)}>Delete</Button>
               </td>
             </tr>
