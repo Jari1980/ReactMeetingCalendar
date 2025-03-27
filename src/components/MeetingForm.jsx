@@ -5,7 +5,11 @@ import meetingLevel from "../assets/data/meetingLevel";
 
 const MeetingForm = () => {
   const { scheduledMeetings, setMeetings } = useMeetingContext();
+  const { uppdateMeeting, setUppdateMeeting } = useMeetingContext();
   const [counter, setCounter] = useState(2);
+
+
+  console.log(uppdateMeeting)
 
   const {
     register,
