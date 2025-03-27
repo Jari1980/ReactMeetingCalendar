@@ -76,7 +76,6 @@ const MeetingForm = () => {
       });
     }
     
-
     if(!uppdateMeeting.uppdate){
         reset({
             title: "",
@@ -87,11 +86,11 @@ const MeetingForm = () => {
             description: "",
           });
     }
-    
-
-    //{uppdateMeeting.uppdate ? "" : uppdateMeeting.title} defaultValue={uppdateMeeting.title}
-    //alert("Meeting is submitted");
   };
+
+  function cancelEdit(){
+    reset(uppdateMeeting)
+  }
 
   console.log(
     "title:" + uppdateMeeting.title + ", uppdate:" + uppdateMeeting.uppdate
@@ -221,7 +220,7 @@ const MeetingForm = () => {
               {!uppdateMeeting.uppdate ? "+ Create Meeting" : "EditMeeting"}
             </button>
             {!uppdateMeeting.uppdate ? "" : 
-          <button className="btn btn-danger" style={{marginLeft: "20px"}}>Cancel Edit</button>}
+          <button className="btn btn-danger" style={{marginLeft: "20px"}} onClick={() => cancelEdit()}>Cancel Edit</button>}
           </div>
         </form>
       </div>
