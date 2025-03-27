@@ -9,23 +9,26 @@ const MeetingForm = () => {
   const [counter, setCounter] = useState(2);
 
 
-  console.log(uppdateMeeting)
+  console.log(uppdateMeeting.uppdate)
 
+  
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
   } = useForm({
-    defaultValues: {
-      title: "",
-      date: "",
-      time: "",
-      level: "",
-      participants: "",
-      description: "",
+    defaultValues: { //These should work but had to add uppdate values to form if uppdate = true
+      title: uppdateMeeting.title,
+      date: uppdateMeeting.date,
+      time: uppdateMeeting.time,
+      level: uppdateMeeting.level,
+      participants: uppdateMeeting.participants,
+      description: uppdateMeeting.description,
     },
   });
+
+
 
   const onSubmit = (data) => {
     console.log("Meeting Form Data:", data);
@@ -56,7 +59,7 @@ const MeetingForm = () => {
   return (
     <div className="container mt-5 d-flex justify-content-center">
       <div className="p-4 border rounded bg-secondary">
-        <h1 className="text-center mb-4">Schedule a new meeting</h1>
+        <h1 className="text-center mb-4">{!uppdateMeeting.uppdate ? "Schedule a new meeting" : "Edit Meeting"}</h1>
         <form onSubmit={handleSubmit(onSubmit)} className="row g-3">
           <div className="col-12">
             <label htmlFor="title" className="form-label">
@@ -64,6 +67,7 @@ const MeetingForm = () => {
             </label>
             <input
               id="title"
+              value={!uppdateMeeting.uppdate ? "" : uppdateMeeting.title}
               className={`form-control ${errors.title ? "is-invalid" : ""}`}
               {...register("title", { required: "Title is required" })}
             />
@@ -78,6 +82,7 @@ const MeetingForm = () => {
             </label>
             <input
               id="date"
+              value={!uppdateMeeting.uppdate ? "" : uppdateMeeting.date}
               type="date"
               className={`form-control ${errors.date ? "is-invalid" : ""}`}
               {...register("date", { required: "Date is required" })}
@@ -93,6 +98,7 @@ const MeetingForm = () => {
             </label>
             <input
               id="time"
+              value={!uppdateMeeting.uppdate ? "" : uppdateMeeting.time}
               type="time"
               className={`form-control ${errors.time ? "is-invalid" : ""}`}
               {...register("time", { required: "Time is required" })}
@@ -108,6 +114,7 @@ const MeetingForm = () => {
             </label>
             <select
               id="level"
+              value={!uppdateMeeting.uppdate ? "" : uppdateMeeting.level}
               className={`form-select ${errors.level ? "is-invalid" : ""}`}
               {...register("level", {
                 required: "Please select a level",
@@ -130,6 +137,7 @@ const MeetingForm = () => {
             </label>
             <input
               id="participants"
+              value={!uppdateMeeting.uppdate ? "" : uppdateMeeting.participants}
               className={`form-control ${
                 errors.participants ? "is-invalid" : ""
               }`}
@@ -148,6 +156,7 @@ const MeetingForm = () => {
             </label>
             <textarea
               id="description"
+              value={!uppdateMeeting.uppdate ? "" : uppdateMeeting.description}
               className={`form-control ${
                 errors.description ? "is-invalid" : ""
               }`}
@@ -162,7 +171,7 @@ const MeetingForm = () => {
 
           <div className="text-center">
             <button type="submit" className="btn btn-primary">
-              + Create Meeting
+            {!uppdateMeeting.uppdate ? "+ Create Meeting" : "EditMeeting"}
             </button>
           </div>
         </form>
