@@ -220,6 +220,8 @@ const MeetingForm = () => {
             <button type="submit" className="btn btn-primary">
               {!uppdateMeeting.uppdate ? "+ Create Meeting" : "EditMeeting"}
             </button>
+            {!uppdateMeeting.uppdate ? "" : 
+          <button className="btn btn-danger" style={{marginLeft: "20px"}}>Cancel Edit</button>}
           </div>
         </form>
       </div>
