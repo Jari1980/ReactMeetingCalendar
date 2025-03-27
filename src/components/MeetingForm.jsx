@@ -9,7 +9,7 @@ const MeetingForm = () => {
   const [counter, setCounter] = useState(2);
 
 
-  console.log(uppdateMeeting.uppdate)
+  console.log(uppdateMeeting.title)
 
   
   const {
@@ -18,13 +18,16 @@ const MeetingForm = () => {
     reset,
     formState: { errors },
   } = useForm({
+    
     defaultValues: { //These should work but had to add uppdate values to form if uppdate = true
-      title: uppdateMeeting.title,
-      date: uppdateMeeting.date,
-      time: uppdateMeeting.time,
-      level: uppdateMeeting.level,
-      participants: uppdateMeeting.participants,
-      description: uppdateMeeting.description,
+        /*
+      title:"", // !uppdateMeeting.uppdate ? "" : uppdateMeeting.title, //uppdateMeeting.title,
+      date: "", //uppdateMeeting.date,
+      time: "", //uppdateMeeting.time,
+      level: "", //uppdateMeeting.level,
+      participants: "", //uppdateMeeting.participants,
+      description: "", //uppdateMeeting.description,
+    */
     },
   });
 
@@ -32,19 +35,31 @@ const MeetingForm = () => {
 
   const onSubmit = (data) => {
     console.log("Meeting Form Data:", data);
-    setMeetings([
-      ...scheduledMeetings,
-      {
-        id: counter,
-        title: data.title,
-        date: data.date,
-        time: data.time,
-        level: data.level,
-        participants: data.participants,
-        description: data.description,
-      },
-    ]);
-    setCounter(counter + 1);
+    if(!uppdateMeeting.uppdate){
+        setMeetings([
+            ...scheduledMeetings,
+            {
+              id: counter,
+              title: data.title,
+              date: data.date,
+              time: data.time,
+              level: data.level,
+              participants: data.participants,
+              description: data.description,
+            },
+          ]);
+          setCounter(counter + 1);
+    }
+    
+    else{
+        let filtered = scheduledMeetings.filter(element => element.id !== uppdateMeeting.id)
+        setMeetings([
+            ...filtered,
+            {id: uppdateMeeting.id, title: data.title, date: data.date, time: data.time, level: data.level, participants: data.participants, description: data.description}
+        ])
+    }
+    setUppdateMeeting({uppdate: false, id: "", title: "", date: "", time: "", level: "", participants: "", description: ""})
+    
     reset({
       title: "",
       date: "",
@@ -53,6 +68,7 @@ const MeetingForm = () => {
       participants: "",
       description: "",
     });
+    
     //alert("Meeting is submitted");
   };
 
@@ -67,7 +83,7 @@ const MeetingForm = () => {
             </label>
             <input
               id="title"
-              value={!uppdateMeeting.uppdate ? "" : uppdateMeeting.title}
+              defaultValue={!uppdateMeeting.uppdate ? "" : uppdateMeeting.title}
               className={`form-control ${errors.title ? "is-invalid" : ""}`}
               {...register("title", { required: "Title is required" })}
             />
@@ -82,7 +98,7 @@ const MeetingForm = () => {
             </label>
             <input
               id="date"
-              value={!uppdateMeeting.uppdate ? "" : uppdateMeeting.date}
+              defaultValue={!uppdateMeeting.uppdate ? "" : uppdateMeeting.date}
               type="date"
               className={`form-control ${errors.date ? "is-invalid" : ""}`}
               {...register("date", { required: "Date is required" })}
@@ -98,7 +114,7 @@ const MeetingForm = () => {
             </label>
             <input
               id="time"
-              value={!uppdateMeeting.uppdate ? "" : uppdateMeeting.time}
+              defaultValue={!uppdateMeeting.uppdate ? "" : uppdateMeeting.time}
               type="time"
               className={`form-control ${errors.time ? "is-invalid" : ""}`}
               {...register("time", { required: "Time is required" })}
@@ -114,7 +130,7 @@ const MeetingForm = () => {
             </label>
             <select
               id="level"
-              value={!uppdateMeeting.uppdate ? "" : uppdateMeeting.level}
+              defaultValue={!uppdateMeeting.uppdate ? "" : uppdateMeeting.level}
               className={`form-select ${errors.level ? "is-invalid" : ""}`}
               {...register("level", {
                 required: "Please select a level",
@@ -137,7 +153,7 @@ const MeetingForm = () => {
             </label>
             <input
               id="participants"
-              value={!uppdateMeeting.uppdate ? "" : uppdateMeeting.participants}
+              defaultValue={!uppdateMeeting.uppdate ? "" : uppdateMeeting.participants}
               className={`form-control ${
                 errors.participants ? "is-invalid" : ""
               }`}
@@ -156,7 +172,7 @@ const MeetingForm = () => {
             </label>
             <textarea
               id="description"
-              value={!uppdateMeeting.uppdate ? "" : uppdateMeeting.description}
+              defaultValue={!uppdateMeeting.uppdate ? "" : uppdateMeeting.description}
               className={`form-control ${
                 errors.description ? "is-invalid" : ""
               }`}
