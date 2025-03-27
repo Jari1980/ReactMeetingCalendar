@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useMeetingContext } from "./context";
 import { useForm } from "react-hook-form";
 import meetingLevel from "../assets/data/meetingLevel";
@@ -8,74 +8,101 @@ const MeetingForm = () => {
   const { uppdateMeeting, setUppdateMeeting } = useMeetingContext();
   const [counter, setCounter] = useState(2);
 
+  console.log(uppdateMeeting.title);
 
-  console.log(uppdateMeeting.title)
-
-  
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
   } = useForm({
+    defaultValues:  useMemo(() => {
+     return [
+        
+     ]   
+    }, [uppdateMeeting])
     
-    defaultValues: { //These should work but had to add uppdate values to form if uppdate = true
-        /*
-      title:"", // !uppdateMeeting.uppdate ? "" : uppdateMeeting.title, //uppdateMeeting.title,
-      date: "", //uppdateMeeting.date,
-      time: "", //uppdateMeeting.time,
-      level: "", //uppdateMeeting.level,
-      participants: "", //uppdateMeeting.participants,
-      description: "", //uppdateMeeting.description,
-    */
-    },
   });
 
+
+  useEffect(() => {
+    reset(uppdateMeeting)
+  }, [uppdateMeeting])
+
+ 
 
 
   const onSubmit = (data) => {
     console.log("Meeting Form Data:", data);
+    if (!uppdateMeeting.uppdate) {
+      setMeetings([
+        ...scheduledMeetings,
+        {
+          id: counter,
+          title: data.title,
+          date: data.date,
+          time: data.time,
+          level: data.level,
+          participants: data.participants,
+          description: data.description,
+        },
+      ]);
+      setCounter(counter + 1);
+    } else {
+      let filtered = scheduledMeetings.filter(
+        (element) => element.id !== uppdateMeeting.id
+      );
+      setMeetings([
+        ...filtered,
+        {
+          id: uppdateMeeting.id,
+          title: data.title,
+          date: data.date,
+          time: data.time,
+          level: data.level,
+          participants: data.participants,
+          description: data.description,
+        },
+      ]);
+      setUppdateMeeting({
+        uppdate: false,
+        id: "",
+        title: "",
+        date: "",
+        time: "",
+        level: "",
+        participants: "",
+        description: "",
+      });
+    }
+    
+
     if(!uppdateMeeting.uppdate){
-        setMeetings([
-            ...scheduledMeetings,
-            {
-              id: counter,
-              title: data.title,
-              date: data.date,
-              time: data.time,
-              level: data.level,
-              participants: data.participants,
-              description: data.description,
-            },
-          ]);
-          setCounter(counter + 1);
+        reset({
+            title: "",
+            date: "",
+            time: "",
+            level: "",
+            participants: "",
+            description: "",
+          });
     }
     
-    else{
-        let filtered = scheduledMeetings.filter(element => element.id !== uppdateMeeting.id)
-        setMeetings([
-            ...filtered,
-            {id: uppdateMeeting.id, title: data.title, date: data.date, time: data.time, level: data.level, participants: data.participants, description: data.description}
-        ])
-    }
-    setUppdateMeeting({uppdate: false, id: "", title: "", date: "", time: "", level: "", participants: "", description: ""})
-    
-    reset({
-      title: "",
-      date: "",
-      time: "",
-      level: "",
-      participants: "",
-      description: "",
-    });
-    
+
+    //{uppdateMeeting.uppdate ? "" : uppdateMeeting.title} defaultValue={uppdateMeeting.title}
     //alert("Meeting is submitted");
   };
+
+  console.log(
+    "title:" + uppdateMeeting.title + ", uppdate:" + uppdateMeeting.uppdate
+  );
 
   return (
     <div className="container mt-5 d-flex justify-content-center">
       <div className="p-4 border rounded bg-secondary">
-        <h1 className="text-center mb-4">{!uppdateMeeting.uppdate ? "Schedule a new meeting" : "Edit Meeting"}</h1>
+        <h1 className="text-center mb-4">
+          {!uppdateMeeting.uppdate ? "Schedule a new meeting" : "Edit Meeting"}
+        </h1>
         <form onSubmit={handleSubmit(onSubmit)} className="row g-3">
           <div className="col-12">
             <label htmlFor="title" className="form-label">
@@ -83,7 +110,7 @@ const MeetingForm = () => {
             </label>
             <input
               id="title"
-              defaultValue={!uppdateMeeting.uppdate ? "" : uppdateMeeting.title}
+              defaultValue={uppdateMeeting.title}
               className={`form-control ${errors.title ? "is-invalid" : ""}`}
               {...register("title", { required: "Title is required" })}
             />
@@ -153,7 +180,9 @@ const MeetingForm = () => {
             </label>
             <input
               id="participants"
-              defaultValue={!uppdateMeeting.uppdate ? "" : uppdateMeeting.participants}
+              defaultValue={
+                !uppdateMeeting.uppdate ? "" : uppdateMeeting.participants
+              }
               className={`form-control ${
                 errors.participants ? "is-invalid" : ""
               }`}
@@ -172,7 +201,9 @@ const MeetingForm = () => {
             </label>
             <textarea
               id="description"
-              defaultValue={!uppdateMeeting.uppdate ? "" : uppdateMeeting.description}
+              defaultValue={
+                !uppdateMeeting.uppdate ? "" : uppdateMeeting.description
+              }
               className={`form-control ${
                 errors.description ? "is-invalid" : ""
               }`}
@@ -187,7 +218,7 @@ const MeetingForm = () => {
 
           <div className="text-center">
             <button type="submit" className="btn btn-primary">
-            {!uppdateMeeting.uppdate ? "+ Create Meeting" : "EditMeeting"}
+              {!uppdateMeeting.uppdate ? "+ Create Meeting" : "EditMeeting"}
             </button>
           </div>
         </form>
