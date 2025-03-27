@@ -16,7 +16,7 @@ const MeetingsTable = () => {
   
   function editMeeting(id){
     let meeting = scheduledMeetings.filter(element => element.id === id)
-    console.log(meeting)
+    console.log("meeting to be edited" + meeting)
     setUppdateMeeting({uppdate: true, id: meeting[0].id, title: meeting[0].title, date: meeting[0].date, time: meeting[0].time, level: meeting[0].level, participants: meeting[0].participants, description: meeting[0].description})
   }
 
