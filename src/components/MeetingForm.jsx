@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { useMeetingContext } from "./context";
 import { useForm } from "react-hook-form";
 import meetingLevel from "../assets/data/meetingLevel";
+import meetings from "../assets/data/meetings";
 
 const MeetingForm = () => {
   const { scheduledMeetings, setMeetings } = useMeetingContext();
@@ -16,21 +17,14 @@ const MeetingForm = () => {
     reset,
     formState: { errors },
   } = useForm({
-    defaultValues:  useMemo(() => {
-     return [
-        
-     ]   
-    }, [uppdateMeeting])
-    
+    defaultValues: useMemo(() => {
+      return [];
+    }, [uppdateMeeting]),
   });
 
-
   useEffect(() => {
-    reset(uppdateMeeting)
-  }, [uppdateMeeting])
-
- 
-
+    reset(uppdateMeeting);
+  }, [uppdateMeeting]);
 
   const onSubmit = (data) => {
     console.log("Meeting Form Data:", data);
@@ -52,7 +46,9 @@ const MeetingForm = () => {
       let filtered = scheduledMeetings.filter(
         (element) => element.id !== uppdateMeeting.id
       );
-      setMeetings([
+
+
+      setMeetings(([
         ...filtered,
         {
           id: uppdateMeeting.id,
@@ -63,7 +59,9 @@ const MeetingForm = () => {
           participants: data.participants,
           description: data.description,
         },
-      ]);
+      ]).sort((a,b) => a.id - b.id));
+
+
       setUppdateMeeting({
         uppdate: false,
         id: "",
@@ -75,21 +73,21 @@ const MeetingForm = () => {
         description: "",
       });
     }
-    
-    if(!uppdateMeeting.uppdate){
-        reset({
-            title: "",
-            date: "",
-            time: "",
-            level: "",
-            participants: "",
-            description: "",
-          });
+
+    if (!uppdateMeeting.uppdate) {
+      reset({
+        title: "",
+        date: "",
+        time: "",
+        level: "",
+        participants: "",
+        description: "",
+      });
     }
   };
 
-  function cancelEdit(){
-    reset(uppdateMeeting)
+  function cancelEdit() {
+    reset(uppdateMeeting);
   }
 
   console.log(
@@ -219,8 +217,17 @@ const MeetingForm = () => {
             <button type="submit" className="btn btn-primary">
               {!uppdateMeeting.uppdate ? "+ Create Meeting" : "EditMeeting"}
             </button>
-            {!uppdateMeeting.uppdate ? "" : 
-          <button className="btn btn-danger" style={{marginLeft: "20px"}} onClick={() => cancelEdit()}>Cancel Edit</button>}
+            {!uppdateMeeting.uppdate ? (
+              ""
+            ) : (
+              <button
+                className="btn btn-danger"
+                style={{ marginLeft: "20px" }}
+                onClick={() => cancelEdit()}
+              >
+                Cancel Edit
+              </button>
+            )}
           </div>
         </form>
       </div>
