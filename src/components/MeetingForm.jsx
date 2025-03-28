@@ -95,8 +95,8 @@ const MeetingForm = () => {
   );
 
   return (
-    <div className="container mt-5 d-flex justify-content-center">
-      <div className="p-4 border rounded bg-secondary">
+    <div className="container mt-5 d-flex justify-content-center" style={{height:"auto"}}>
+      <div className="p-4 rounded-top bg-secondary">
         <h1 className="text-center mb-4">
           {!uppdateMeeting.uppdate ? "Schedule a new meeting" : "Edit Meeting"}
         </h1>
