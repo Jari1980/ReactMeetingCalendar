@@ -2,6 +2,8 @@ import React from "react";
 import { Table } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import { useMeetingContext } from "./context";
+import Edit from "../assets/images/Edit.png"
+import Delete from "../assets/images/Delete.png"
 
 
 const MeetingsTable = () => {
@@ -43,8 +45,8 @@ const MeetingsTable = () => {
               <td>{item.time}</td>
               <td>{item.level}</td>
               <td>
-                <Button onClick={() => editMeeting(item.id)}>Edit</Button>
-                <Button onClick={() => deleteMeeting(item.id)}>Delete</Button>
+                <Button style={{marginRight:"20px"}} onClick={() => editMeeting(item.id)}><img src={Edit} style={{width:"20px", height:"20px", paddingBottom: "4px"}}></img></Button>
+                <Button style={{backgroundColor:"red"}} onClick={() => deleteMeeting(item.id)}><img src={Delete} style={{width:"20px", height:"20px", paddingBottom: "4px"}}></img></Button>
               </td>
             </tr>
           </tbody>
