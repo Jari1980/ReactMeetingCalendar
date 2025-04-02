@@ -6,6 +6,7 @@ import { MeetingProvider } from "./components/context";
 import NavBarComp from "./components/NavBarComp";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./components/Home"
+import Dashboard from "./components/Dashboard";
 
 createRoot(document.getElementById("root")).render(
   <BrowserRouter>
@@ -14,7 +15,7 @@ createRoot(document.getElementById("root")).render(
     <Routes>
     <Route path="/" elemet={<Home />} />
     <Route path="/home" element={<Home />} />
-      <Route path="dashboard/*" element={<ManageMeetings />} />
+      <Route path="dashboard/*" element={<Dashboard />} />
     </Routes>
     </MeetingProvider>
   </BrowserRouter>
