@@ -10,9 +10,9 @@ const NavBarComp = () => {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ms-auto">
-              <Nav.Link as={Link} to="/about">About</Nav.Link>
-              <Nav.Link as={Link} to="/Services">Services</Nav.Link>
-              <Nav.Link as={Link} to="/meny">Contact</Nav.Link>
+              <Nav.Link as={Link} to="/about" disabled>About</Nav.Link>
+              <Nav.Link as={Link} to="/Services" disabled>Services</Nav.Link>
+              <Nav.Link as={Link} to="/meny" disabled>Contact</Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Navbar>
