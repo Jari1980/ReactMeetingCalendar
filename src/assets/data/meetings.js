@@ -1,6 +1,15 @@
 import meetingLevel from "./meetingLevel";
+import axios from "axios";
 
 
+let meetings = [{}]
+/*
+axios.get("http://localhost:8080/api/v1/project/meetings").then((response) => {
+    console.log(response.data)
+    meetings = response.data
+})
+*/
+/*
 const meetings = [
     {
         id: 0,
@@ -21,5 +30,6 @@ const meetings = [
         description: "Test meeting 2"
     },
 ]
+    */
 
 export default meetings;
