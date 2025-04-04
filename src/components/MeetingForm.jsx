@@ -3,6 +3,7 @@ import { useMeetingContext } from "./context";
 import { useForm } from "react-hook-form";
 import meetingLevel from "../assets/data/meetingLevel";
 import meetings from "../assets/data/meetings";
+import axios from "axios";
 
 const MeetingForm = () => {
   const { scheduledMeetings, setMeetings } = useMeetingContext();
@@ -23,6 +24,10 @@ const MeetingForm = () => {
   });
 
   useEffect(() => {
+    axios.get("http://localhost:8080/api/v1/project/meetings").then((response) => {
+        setMeetings(response.data)
+    })
+    console.log("getting here")
     reset(uppdateMeeting);
   }, [uppdateMeeting]);
 
