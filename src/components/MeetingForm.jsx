@@ -24,16 +24,45 @@ const MeetingForm = () => {
   });
 
   useEffect(() => {
-    axios.get("http://localhost:8080/api/v1/project/meetings").then((response) => {
-        setMeetings(response.data)
-    })
-    console.log("getting here")
+    axios
+      .get("http://localhost:8080/api/v1/project/meetings")
+      .then((response) => {
+        setMeetings(response.data);
+      });
+    console.log("getting here");
     reset(uppdateMeeting);
   }, [uppdateMeeting]);
 
-  const onSubmit = (data) => {
-    console.log("Meeting Form Data:", data);
+  const onSubmit = async (data) => {
     if (!uppdateMeeting.uppdate) {
+      axios
+        .post("http://localhost:8080/api/v1/project/meetings", {
+          title: data.title,
+          date: data.date,
+          time: data.time,
+          level: data.level.toUpperCase(),
+          participants: data.participants,
+          description: data.description,
+        })
+        .then(
+          reset({
+            title: "",
+            date: "",
+            time: "",
+            level: "",
+            participants: "",
+            description: "",
+          })
+        )
+        .then(() => {
+          axios
+            .get("http://localhost:8080/api/v1/project/meetings")
+            .then((response) => {
+              setMeetings(response.data);
+            });
+        });
+
+      /* //Running w/o API
       setMeetings([
         ...scheduledMeetings,
         {
@@ -46,13 +75,36 @@ const MeetingForm = () => {
           description: data.description,
         },
       ]);
-      setCounter(counter + 1);
+      setCounter(counter + 1); */
     } else {
+      try {
+        const response = await axios.put(
+          "http://localhost:8080/api/v1/project/meetings/update",
+          {
+            id: uppdateMeeting.id,
+            title: data.title,
+            date: data.date,
+            time: data.time,
+            level: data.level.toUpperCase(),
+            participants: data.participants,
+            description: data.description,
+          }
+        )
+        .then(() => {
+            axios
+              .get("http://localhost:8080/api/v1/project/meetings")
+              .then((response) => {
+                setMeetings(response.data);
+              });
+          });
+      } catch (error) {
+        console.log("Error uppdateing: " + error)
+      }
+
+      /* // Working w/o API
       let filtered = scheduledMeetings.filter(
         (element) => element.id !== uppdateMeeting.id
       );
-
-
       setMeetings(([
         ...filtered,
         {
@@ -65,7 +117,7 @@ const MeetingForm = () => {
           description: data.description,
         },
       ]).sort((a,b) => a.id - b.id));
-
+*/
 
       setUppdateMeeting({
         uppdate: false,
@@ -79,7 +131,7 @@ const MeetingForm = () => {
       });
     }
 
-    if (!uppdateMeeting.uppdate) {
+    /*if (!uppdateMeeting.uppdate) {
       reset({
         title: "",
         date: "",
@@ -88,7 +140,7 @@ const MeetingForm = () => {
         participants: "",
         description: "",
       });
-    }
+    }*/
   };
 
   function cancelEdit() {
@@ -100,7 +152,10 @@ const MeetingForm = () => {
   );
 
   return (
-    <div className="container mt-5 d-flex justify-content-center" style={{height:"auto"}}>
+    <div
+      className="container mt-5 d-flex justify-content-center"
+      style={{ height: "auto" }}
+    >
       <div className="p-4 rounded-top bg-secondary">
         <h1 className="text-center mb-4">
           {!uppdateMeeting.uppdate ? "Schedule a new meeting" : "Edit Meeting"}

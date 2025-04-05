@@ -4,6 +4,7 @@ import { Button } from "react-bootstrap";
 import { useMeetingContext } from "./context";
 import Edit from "../assets/images/Edit.png"
 import Delete from "../assets/images/Delete.png"
+import axios from "axios";
 
 
 const MeetingsTable = () => {
@@ -11,9 +12,26 @@ const MeetingsTable = () => {
   const { uppdateMeeting, setUppdateMeeting } = useMeetingContext();
 
 
-  function deleteMeeting(id) {
-    let filtered = scheduledMeetings.filter(element => element.id !== id)
-    setMeetings(filtered)
+  const deleteMeeting = async(id) => {
+    //let filtered = scheduledMeetings.filter(element => element.id !== id) //Used when running local meeting list
+    //setMeetings(filtered)
+
+     try {
+        const response = await axios.delete(`http://localhost:8080/api/v1/project/meetings/delete?id=${id}`, {
+            method: 'DELETE',
+            mode: 'cors',
+        })
+        if (response.status === 200){
+            axios.get("http://localhost:8080/api/v1/project/meetings").then((res) => {
+                setMeetings(res.data)
+            })
+        }
+    }
+    catch (error){
+        console.log("Something went wrong when deleting meeting: " + error)
+    }
+
+
   }
   
   function editMeeting(id){
