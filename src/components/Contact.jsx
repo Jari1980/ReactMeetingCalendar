@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { Container, Form, Button } from "react-bootstrap";
 import { useForm } from "react-hook-form";
+import axios from "axios";
 
 
 const Contact = () => {
@@ -8,12 +9,20 @@ const Contact = () => {
     
     function handleSubmit(event) {
         event.preventDefault()
-        console.log(event.currentTarget.elements.formName.value + "mmm")
-        console.log(event.currentTarget.elements.formEmail.value)
-        console.log(event.currentTarget.elements.formMessage.value)
-        console.log(event.currentTarget.elements.formCheckbox.checked)
-
+        try{
+            axios
+        .post("http://localhost:8080/api/v1/project/contact", {
+          name: event.currentTarget.elements.formName.value,
+          message: event.currentTarget.elements.formMessage.value,
+          email: event.currentTarget.elements.formEmail.value,
+          broccoli: event.currentTarget.elements.formCheckbox.checked,
+        })
         event.target.reset()
+        alert("Thanks for the message")
+        }
+        catch(error){
+            console.log("Error sending message: " + error)
+        }
     }
 
   return (
