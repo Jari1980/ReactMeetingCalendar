@@ -10,6 +10,7 @@ import Dashboard from "./components/Dashboard";
 import FooterComp from "./components/FooterComp";
 import Contact from "./components/Contact";
 import About from "./components/About";
+import Login from "./components/Login";
 
 createRoot(document.getElementById("root")).render(
   <BrowserRouter>
@@ -20,6 +21,7 @@ createRoot(document.getElementById("root")).render(
         <Route path="/home" element={<Home />} />
         <Route path="about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/login" element={<Login />}/>
         <Route path="dashboard/*" element={<Dashboard />} />
       </Routes>
     </MeetingProvider>
