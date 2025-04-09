@@ -25,8 +25,14 @@ const MeetingForm = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/api/v1/project/meetings")
+      .get("http://localhost:8080/api/v1/project/meetings", {
+        auth: {
+          username: localStorage.getItem("username"),
+          password: localStorage.getItem("password"),
+        },
+      })
       .then((response) => {
+        console.log("getting here");
         setMeetings(response.data);
       });
     console.log("getting here");
@@ -43,6 +49,11 @@ const MeetingForm = () => {
           level: data.level.toUpperCase(),
           participants: data.participants,
           description: data.description,
+        },{
+          auth: {
+            username: localStorage.getItem("username"),
+            password: localStorage.getItem("password"),
+          }
         })
         .then(
           reset({
@@ -56,7 +67,12 @@ const MeetingForm = () => {
         )
         .then(() => {
           axios
-            .get("http://localhost:8080/api/v1/project/meetings")
+            .get("http://localhost:8080/api/v1/project/meetings", {
+              auth: {
+                username: localStorage.getItem("username"),
+                password: localStorage.getItem("password"),
+              },
+            })
             .then((response) => {
               setMeetings(response.data);
             });
@@ -78,9 +94,8 @@ const MeetingForm = () => {
       setCounter(counter + 1); */
     } else {
       try {
-        const response = await axios.put(
-          "http://localhost:8080/api/v1/project/meetings/update",
-          {
+        const response = await axios
+          .put("http://localhost:8080/api/v1/project/meetings/update", {
             id: uppdateMeeting.id,
             title: data.title,
             date: data.date,
@@ -88,9 +103,8 @@ const MeetingForm = () => {
             level: data.level.toUpperCase(),
             participants: data.participants,
             description: data.description,
-          }
-        )
-        .then(() => {
+          })
+          .then(() => {
             axios
               .get("http://localhost:8080/api/v1/project/meetings")
               .then((response) => {
@@ -98,7 +112,7 @@ const MeetingForm = () => {
               });
           });
       } catch (error) {
-        console.log("Error uppdateing: " + error)
+        console.log("Error uppdateing: " + error);
       }
 
       /* // Working w/o API

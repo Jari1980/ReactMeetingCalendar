@@ -10,7 +10,7 @@ const About = () => {
             <br />
             <p>This is a Lexicon/Växjö school project done by me. What you see is a single page application SPA where front end is done with React JS and backend with Java Spring Rest API connected to mySQL database.
             </p>
-            <p>The main goal off this application is to have a user can set mettings, view and edit won meetings and user with admin role can view and manage all meetings.
+            <p>The main goal off this application is to have a super user who needs to log in and after he/she can see and manage meetings.
             </p>
             <p>
                 <b>Main frontend techniques in this project:</b>
