@@ -3,17 +3,35 @@ import { Button, Container, Form } from "react-bootstrap";
 import axios from "axios";
 
 const Login = () => {
+
+
   function handleSubmit(event) {
     event.preventDefault();
     try {
       axios.post("http://localhost:8080/api/v1/project/login", {
-        name: event.currentTarget.elements.formUserName.value,
+        username: event.currentTarget.elements.formUserName.value,
         password: event.currentTarget.elements.formPassword.value,
-      });
+      })
+      const userData = {
+        username: event.currentTarget.elements.formUserName.value,
+        password: event.currentTarget.elements.formPassword.value
+      }
+      localStorage.clear()
       event.target.reset()
+      localStorage.setItem("userInfo", JSON.stringify(userData))
+      localStorage.setItem("username", userData.username)
+      localStorage.setItem("password", userData.password)
+      
+      
     } catch (error) {
       console.log("Error sending message: " + error);
     }
+  }
+
+  
+
+  function mmm(){
+    alert("This is what I get: " + localStorage.getItem("username"))
   }
 
   return (
@@ -34,6 +52,10 @@ const Login = () => {
           <Button variant="primary" type="submit">
             LogIn
           </Button>
+          <br />
+          <br />
+          <br />
+          <Button onClick={() => mmm()}>What stored in localStorage userInfo</Button>
         </Form>
       </Container>
     </>
