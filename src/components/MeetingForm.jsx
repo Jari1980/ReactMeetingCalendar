@@ -103,10 +103,19 @@ const MeetingForm = () => {
             level: data.level.toUpperCase(),
             participants: data.participants,
             description: data.description,
-          })
+          },{
+            auth: {
+              username: localStorage.getItem("username"),
+              password: localStorage.getItem("password"),
+            }})
           .then(() => {
             axios
-              .get("http://localhost:8080/api/v1/project/meetings")
+              .get("http://localhost:8080/api/v1/project/meetings", {
+                auth: {
+                  username: localStorage.getItem("username"),
+                  password: localStorage.getItem("password"),
+                },
+              })
               .then((response) => {
                 setMeetings(response.data);
               });
