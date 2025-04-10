@@ -11,17 +11,19 @@ import FooterComp from "./components/FooterComp";
 import Contact from "./components/Contact";
 import About from "./components/About";
 import Login from "./components/Login";
+import Logout from "./components/Logout";
 
 createRoot(document.getElementById("root")).render(
   <BrowserRouter>
-    <NavBarComp />
     <MeetingProvider>
+      <NavBarComp />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/home" element={<Home />} />
         <Route path="about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/login" element={<Login />}/>
+        <Route path="/login" element={<Login />} />
+        <Route path="/logout" element={<Logout />} />
         <Route path="dashboard/*" element={<Dashboard />} />
       </Routes>
     </MeetingProvider>
