@@ -1,38 +1,50 @@
 import React from "react";
 import { Button, Container, Form } from "react-bootstrap";
 import axios from "axios";
+import { useMeetingContext } from "./context";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const Login = () => {
-
+  const {logged, setLogged} = useMeetingContext();
+  const navigate = useNavigate();
 
   function handleSubmit(event) {
     event.preventDefault();
+    const userData = {
+      username: event.currentTarget.elements.formUserName.value,
+      password: event.currentTarget.elements.formPassword.value,
+    };
     try {
-      axios.post("http://localhost:8080/api/v1/project/login", {
-        username: event.currentTarget.elements.formUserName.value,
-        password: event.currentTarget.elements.formPassword.value,
+      axios.get("http://localhost:8080/api/v1/project/authenticate", {
+        auth: {
+          username: event.currentTarget.elements.formUserName.value,
+          password: event.currentTarget.elements.formPassword.value,
+        },
       })
-      const userData = {
-        username: event.currentTarget.elements.formUserName.value,
-        password: event.currentTarget.elements.formPassword.value
-      }
-      localStorage.clear()
-      event.target.reset()
-      localStorage.setItem("userInfo", JSON.stringify(userData))
-      localStorage.setItem("username", userData.username)
-      localStorage.setItem("password", userData.password)
-      
-      
+      .then((response) => {
+        if(response.data == true){
+          setLogged(true)
+
+          //localStorage.clear();
+          event.target.reset();
+          localStorage.setItem("userInfo", JSON.stringify(userData));
+          localStorage.setItem("username", userData.username);
+          localStorage.setItem("password", userData.password);
+          
+          navigate("/")
+          
+        }
+        else{
+          localStorage.clear();
+          event.target.reset();
+          setLogged(false)
+        }
+      });
     } catch (error) {
       console.log("Error sending message: " + error);
     }
   }
 
-  
-
-  function mmm(){
-    alert("This is what I get: " + localStorage.getItem("username"))
-  }
 
   return (
     <>
@@ -55,7 +67,7 @@ const Login = () => {
           <br />
           <br />
           <br />
-          <Button onClick={() => mmm()}>What stored in localStorage userInfo</Button>
+          <h2>Status: {logged ? "You are logged in" : "Not logged in"}</h2>
         </Form>
       </Container>
     </>
