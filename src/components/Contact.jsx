@@ -2,9 +2,11 @@ import React, { useEffect } from "react";
 import { Container, Form, Button } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import axios from "axios";
+import { useMeetingContext } from './context';
 
 
 const Contact = () => {
+  const {bgMain, setBgMain} = useMeetingContext();
 
     
     function handleSubmit(event) {
@@ -16,6 +18,12 @@ const Contact = () => {
           message: event.currentTarget.elements.formMessage.value,
           email: event.currentTarget.elements.formEmail.value,
           broccoli: event.currentTarget.elements.formCheckbox.checked,
+        },
+        {
+          auth: {
+            username: localStorage.getItem("username"),
+            password: localStorage.getItem("password"),
+          },
         })
         event.target.reset()
         alert("Thanks for the message")
@@ -27,6 +35,7 @@ const Contact = () => {
 
   return (
     <>
+    <div style={{backgroundImage:bgMain, width:"100vw", height:"100vh", overflow: "hidden"}}>
       <Container>
         <h1 style={{ marginTop: "20px" }}>Contact form</h1>
         <br />
@@ -52,6 +61,7 @@ const Contact = () => {
           </Button>
         </Form>
       </Container>
+      </div>
     </>
   );
 };

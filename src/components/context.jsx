@@ -1,23 +1,45 @@
-import React, {createContext, useContext, useState} from 'react'
-import meetings from '../assets/data/meetings'
-import axios from 'axios'
+import React, { createContext, useContext, useState } from "react";
+import meetings from "../assets/data/meetings";
+import axios from "axios";
 
-const MeetingContext = createContext()
+const MeetingContext = createContext();
 
-export const MeetingProvider = ({children}) => {
-    const [scheduledMeetings, setMeetings] = useState(meetings)
-    const [uppdateMeeting, setUppdateMeeting] = useState({uppdate: false, id: 0, title: "", date: "", time: "", level: "", participants: "", description: ""})
-    const [logged, setLogged] = useState(false)
-    const [background, setBackground] = useState("#212529")
+export const MeetingProvider = ({ children }) => {
+  const [scheduledMeetings, setMeetings] = useState(meetings);
+  const [uppdateMeeting, setUppdateMeeting] = useState({
+    uppdate: false,
+    id: 0,
+    title: "",
+    date: "",
+    time: "",
+    level: "",
+    participants: "",
+    description: "",
+  });
+  const [logged, setLogged] = useState(false);
+  const [background, setBackground] = useState("#212529");
+  const [bgMain, setBgMain] = useState(
+    "linear-gradient(250deg,rgb(92, 99, 121),rgb(197, 201, 214) 50%,rgb(75, 91, 143))"
+  );
 
-    
+  return (
+    <MeetingContext.Provider
+      value={{
+        scheduledMeetings,
+        setMeetings,
+        uppdateMeeting,
+        setUppdateMeeting,
+        logged,
+        setLogged,
+        background,
+        setBackground,
+        bgMain,
+        setBgMain,
+      }}
+    >
+      {children}
+    </MeetingContext.Provider>
+  );
+};
 
-    return (
-        <MeetingContext.Provider value={{scheduledMeetings, setMeetings, uppdateMeeting, setUppdateMeeting, logged, setLogged, background, setBackground}}>
-            {children}
-        </MeetingContext.Provider>
-    )
-}
-
-export const useMeetingContext = () => useContext(MeetingContext)
-
+export const useMeetingContext = () => useContext(MeetingContext);

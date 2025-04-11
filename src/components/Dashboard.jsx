@@ -13,6 +13,7 @@ import { useMeetingContext } from './context';
 const Dashboard = () => {
     const navigate = useNavigate();
     const {background, setBackground} = useMeetingContext();
+    const {bgMain, setBgMain} = useMeetingContext();
     
     return (
         <>
@@ -93,6 +94,7 @@ const Dashboard = () => {
           </ul>
         </Nav>
       </aside>
+      <div style={{backgroundImage:bgMain, width:"100vw", height:"100vh", overflow: "hidden", marginLeft: "-2px"}}>
       <main style={{ flex:2, padding: "16px" }}>
         <Routes>
             <Route path='/' element={<DashHome/>}/>
@@ -101,6 +103,7 @@ const Dashboard = () => {
             <Route path='/manageall' element={<ManageMeetings/>}/>
         </Routes>
         </main>
+        </div>
         </div>
         </>
     );

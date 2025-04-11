@@ -7,6 +7,7 @@ import { Navigate, useNavigate } from "react-router-dom";
 const Login = () => {
   const {logged, setLogged} = useMeetingContext();
   const navigate = useNavigate();
+  const {bgMain, setBgMain} = useMeetingContext();
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -48,6 +49,7 @@ const Login = () => {
 
   return (
     <>
+    <div style={{backgroundImage:bgMain, width:"100vw", height:"100vh", overflow: "hidden"}}>
       <Container>
         <h1 style={{ marginTop: "20px" }}>Login</h1>
         <br />
@@ -64,12 +66,9 @@ const Login = () => {
           <Button variant="primary" type="submit">
             LogIn
           </Button>
-          <br />
-          <br />
-          <br />
-          <h2>Status: {logged ? "You are logged in" : "Not logged in"}</h2>
         </Form>
       </Container>
+      </div>
     </>
   );
 };
