@@ -8,11 +8,12 @@ export const MeetingProvider = ({children}) => {
     const [scheduledMeetings, setMeetings] = useState(meetings)
     const [uppdateMeeting, setUppdateMeeting] = useState({uppdate: false, id: 0, title: "", date: "", time: "", level: "", participants: "", description: ""})
     const [logged, setLogged] = useState(false)
+    const [background, setBackground] = useState("#212529")
 
     
 
     return (
-        <MeetingContext.Provider value={{scheduledMeetings, setMeetings, uppdateMeeting, setUppdateMeeting, logged, setLogged}}>
+        <MeetingContext.Provider value={{scheduledMeetings, setMeetings, uppdateMeeting, setUppdateMeeting, logged, setLogged, background, setBackground}}>
             {children}
         </MeetingContext.Provider>
     )
