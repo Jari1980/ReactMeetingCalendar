@@ -9,6 +9,7 @@ const MeetingForm = () => {
   const { scheduledMeetings, setMeetings } = useMeetingContext();
   const { uppdateMeeting, setUppdateMeeting } = useMeetingContext();
   const [counter, setCounter] = useState(2);
+  const { logged, setLogged } = useMeetingContext();
 
   console.log(uppdateMeeting.title);
 
@@ -24,61 +25,68 @@ const MeetingForm = () => {
   });
 
   useEffect(() => {
-    axios
-      .get("http://localhost:8080/api/v1/project/meetings", {
-        auth: {
-          username: localStorage.getItem("username"),
-          password: localStorage.getItem("password"),
-        },
-      })
-      .then((response) => {
-        console.log("getting here");
-        setMeetings(response.data);
-      });
+    if (logged) {
+      axios
+        .get("http://localhost:8080/api/v1/project/meetings", {
+          auth: {
+            username: localStorage.getItem("username"),
+            password: localStorage.getItem("password"),
+          },
+        })
+        .then((response) => {
+          console.log("getting here");
+          setMeetings(response.data);
+        });
+    }
     console.log("getting here");
     reset(uppdateMeeting);
   }, [uppdateMeeting]);
 
   const onSubmit = async (data) => {
-    if (!uppdateMeeting.uppdate) {
-      axios
-        .post("http://localhost:8080/api/v1/project/meetings", {
-          title: data.title,
-          date: data.date,
-          time: data.time,
-          level: data.level.toUpperCase(),
-          participants: data.participants,
-          description: data.description,
-        },{
-          auth: {
-            username: localStorage.getItem("username"),
-            password: localStorage.getItem("password"),
-          }
-        })
-        .then(
-          reset({
-            title: "",
-            date: "",
-            time: "",
-            level: "",
-            participants: "",
-            description: "",
-          })
-        )
-        .then(() => {
-          axios
-            .get("http://localhost:8080/api/v1/project/meetings", {
+    if (logged) {
+      if (!uppdateMeeting.uppdate) {
+        axios
+          .post(
+            "http://localhost:8080/api/v1/project/meetings",
+            {
+              title: data.title,
+              date: data.date,
+              time: data.time,
+              level: data.level.toUpperCase(),
+              participants: data.participants,
+              description: data.description,
+            },
+            {
               auth: {
                 username: localStorage.getItem("username"),
                 password: localStorage.getItem("password"),
               },
+            }
+          )
+          .then(
+            reset({
+              title: "",
+              date: "",
+              time: "",
+              level: "",
+              participants: "",
+              description: "",
             })
-            .then((response) => {
-              setMeetings(response.data);
-            });
-        });
+          )
+          .then(() => {
+            axios
+              .get("http://localhost:8080/api/v1/project/meetings", {
+                auth: {
+                  username: localStorage.getItem("username"),
+                  password: localStorage.getItem("password"),
+                },
+              })
+              .then((response) => {
+                setMeetings(response.data);
+              });
+          });
 
-      /* //Running w/o API
+        /* //Running w/o API
       setMeetings([
         ...scheduledMeetings,
         {
@@ -92,36 +100,42 @@ const MeetingForm = () => {
         },
       ]);
       setCounter(counter + 1); */
-    } else {
-      try {
-        const response = await axios
-          .put("http://localhost:8080/api/v1/project/meetings/update", {
-            id: uppdateMeeting.id,
-            title: data.title,
-            date: data.date,
-            time: data.time,
-            level: data.level.toUpperCase(),
-            participants: data.participants,
-            description: data.description,
-          },{
-            auth: {
-              username: localStorage.getItem("username"),
-              password: localStorage.getItem("password"),
-            }})
-          .then(() => {
-            axios
-              .get("http://localhost:8080/api/v1/project/meetings", {
+      } else {
+        try {
+          const response = await axios
+            .put(
+              "http://localhost:8080/api/v1/project/meetings/update",
+              {
+                id: uppdateMeeting.id,
+                title: data.title,
+                date: data.date,
+                time: data.time,
+                level: data.level.toUpperCase(),
+                participants: data.participants,
+                description: data.description,
+              },
+              {
                 auth: {
                   username: localStorage.getItem("username"),
                   password: localStorage.getItem("password"),
                 },
-              })
-              .then((response) => {
-                setMeetings(response.data);
-              });
-          });
-      } catch (error) {
-        console.log("Error uppdateing: " + error);
+              }
+            )
+            .then(() => {
+              axios
+                .get("http://localhost:8080/api/v1/project/meetings", {
+                  auth: {
+                    username: localStorage.getItem("username"),
+                    password: localStorage.getItem("password"),
+                  },
+                })
+                .then((response) => {
+                  setMeetings(response.data);
+                });
+            });
+        } catch (error) {
+          console.log("Error uppdateing: " + error);
+        }
       }
 
       /* // Working w/o API
