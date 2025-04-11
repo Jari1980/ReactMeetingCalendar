@@ -26,7 +26,7 @@ createRoot(document.getElementById("root")).render(
         <Route path="/logout" element={<Logout />} />
         <Route path="dashboard/*" element={<Dashboard />} />
       </Routes>
+      <FooterComp />
     </MeetingProvider>
-    <FooterComp />
   </BrowserRouter>
 );

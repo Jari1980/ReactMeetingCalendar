@@ -6,18 +6,20 @@ import DashHome from './DashHome';
 import { Navbar, Nav, NavLink } from 'react-bootstrap';
 import {Button} from 'react-bootstrap';
 import MeetingsTable from './MeetingsTable';
+import { useMeetingContext } from './context';
 
 
 
 const Dashboard = () => {
     const navigate = useNavigate();
+    const {background, setBackground} = useMeetingContext();
     
     return (
         <>
         <div style={{ display: "flex", height: "1200px"}}>
         <aside
         style={{
-          background: "#212529",
+          background: background,
           padding: "16px",
           borderRight: "1px solid #ddd",
         }}
