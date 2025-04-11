@@ -11,7 +11,7 @@ const NavBarComp = () => {
 
   function handleClick(){
     if(dark === "dark"){
-      setBackground("#f8f9fa")
+      setBackground("#8496a9")   //("#f8f9fa")
       setDark("light")
       setBgMain("linear-gradient(250deg,rgb(117, 143, 231), rgb(221, 225, 235) 50%,rgb(202, 206, 219))")
     }
