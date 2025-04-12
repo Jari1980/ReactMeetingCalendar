@@ -3,6 +3,7 @@ import { Container, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import broccoli2 from "../assets/images/broccoli2.jpg";
 import { useMeetingContext } from "./context";
+import "../stylesheet.css";
 
 
 const Home = () => {
@@ -23,11 +24,11 @@ const Home = () => {
       {logged ? 
       <div>
         <p>As always take a moment and admire the Broccoli before proceeding to Dashboard</p>
-      <Button onClick={() => Navigate("/dashboard")}>Dashboard</Button></div> 
+      <Button onClick={() => Navigate("/dashboard")} className="extButton">Dashboard</Button></div> 
       : 
       <div>
         <p>In order to access Dashboard and manage meetings you need to login.</p>
-        <Button onClick={() => login()}>Login</Button>
+        <Button onClick={() => login()} className="extButton">Login</Button>
         </div>
         }
       <br />

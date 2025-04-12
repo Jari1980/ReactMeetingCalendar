@@ -2,6 +2,7 @@ import React from "react";
 import { Button, Container, Form } from "react-bootstrap";
 import { useMeetingContext } from "./context";
 import { useNavigate } from "react-router-dom";
+import "../stylesheet.css";
 
 const Logout = () => {
   const { logged, setLogged } = useMeetingContext();
@@ -21,7 +22,7 @@ const Logout = () => {
         <h1 style={{ marginTop: "20px" }}>Logout</h1>
         <br />
         <br />
-        <Button onClick={() => logout()}>LogOut</Button>
+        <Button onClick={() => logout()} className="extButton" style={{width:"100%"}}>LogOut</Button>
       </Container>
       </div>
     </>
