@@ -32,7 +32,7 @@ const Dashboard = () => {
                 className="btn btn-outline-primary w-100 mb-2"
                 onClick={() => navigate("../dashboard")}
               >
-                Dashboard
+                Dashboard Start
               </button>
             </li>
             <li>
@@ -41,14 +41,6 @@ const Dashboard = () => {
                 onClick={() => navigate("../dashboard/schedulemeeting")}
               >
                 Schedule Meeting
-              </button>
-            </li>
-            <li>
-              <button
-                className="btn btn-outline-primary w-100 mb-2"
-                onClick={() => navigate("../dashboard/managemeetings")}
-              >
-                Manage Meetings
               </button>
             </li>
             <li>
@@ -99,7 +91,6 @@ const Dashboard = () => {
         <Routes>
             <Route path='/' element={<DashHome/>}/>
             <Route path='/schedulemeeting' element={<MeetingForm/>}/>
-            <Route path='/managemeetings' element={<MeetingsTable/>}/>
             <Route path='/manageall' element={<ManageMeetings/>}/>
         </Routes>
         </main>

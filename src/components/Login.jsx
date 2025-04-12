@@ -3,6 +3,7 @@ import { Button, Container, Form } from "react-bootstrap";
 import axios from "axios";
 import { useMeetingContext } from "./context";
 import { Navigate, useNavigate } from "react-router-dom";
+import "../stylesheet.css";
 
 const Login = () => {
   const {logged, setLogged} = useMeetingContext();
@@ -50,20 +51,20 @@ const Login = () => {
   return (
     <>
     <div style={{backgroundImage:bgMain, width:"100vw", height:"100vh", overflow: "hidden"}}>
-      <Container>
+      <Container style={{width:"50%", alignItems:"center", justifyContent: "center"}}>
         <h1 style={{ marginTop: "20px" }}>Login</h1>
         <br />
         <br />
         <Form onSubmit={handleSubmit}>
           <Form.Group className="mb-3" controlId="formUserName">
-            <Form.Label>Username</Form.Label>
+            <Form.Label><b>Username</b></Form.Label>
             <Form.Control type="text" placeholder="Enter username" />
           </Form.Group>
           <Form.Group className="mb-3" controlId="formPassword">
-            <Form.Label>Password</Form.Label>
+            <Form.Label><b>Password</b></Form.Label>
             <Form.Control type="password" placeholder="Enter password" />
           </Form.Group>
-          <Button variant="primary" type="submit">
+          <Button variant="primary" type="submit" className="extButton">
             LogIn
           </Button>
         </Form>

@@ -3,6 +3,7 @@ import { Container, Form, Button } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useMeetingContext } from './context';
+import "../stylesheet.css";
 
 
 const Contact = () => {
@@ -19,12 +20,12 @@ const Contact = () => {
           email: event.currentTarget.elements.formEmail.value,
           broccoli: event.currentTarget.elements.formCheckbox.checked,
         },
-        {
+        /*{
           auth: {
             username: localStorage.getItem("username"),
             password: localStorage.getItem("password"),
           },
-        })
+        }*/)
         event.target.reset()
         alert("Thanks for the message")
         }
@@ -36,27 +37,27 @@ const Contact = () => {
   return (
     <>
     <div style={{backgroundImage:bgMain, width:"100vw", height:"100vh", overflow: "hidden"}}>
-      <Container>
-        <h1 style={{ marginTop: "20px" }}>Contact form</h1>
+      <Container style={{width:"50%", alignItems:"center", justifyContent: "center"}}>
+        <h1>Contact form</h1>
         <br />
         <br />
-        <Form onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit} >
           <Form.Group className="mb-3" controlId="formName">
-            <Form.Label>Name</Form.Label>
+            <Form.Label><b>Name</b></Form.Label>
             <Form.Control type="text" placeholder="Enter your name" />
           </Form.Group>
           <Form.Group className="mb-3" controlId="formEmail">
-            <Form.Label>Email address</Form.Label>
+            <Form.Label><b>Email address</b></Form.Label>
             <Form.Control type="email" placeholder="Enter email" />
           </Form.Group>
           <Form.Group className="mb-3" controlId="formMessage">
-            <Form.Label>Message</Form.Label>
+            <Form.Label><b>Message</b></Form.Label>
             <Form.Control as="textarea" rows={3} placeholder="Write something" />
           </Form.Group>
           <Form.Group className="mb-3" controlId="formCheckbox">
             <Form.Check type="checkbox" label="I love Broccoli" />
           </Form.Group>
-          <Button variant="primary" type="submit">
+          <Button variant="primary" type="submit" className="extButton">
             Send me a mail
           </Button>
         </Form>
