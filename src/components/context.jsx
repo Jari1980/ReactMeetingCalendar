@@ -21,6 +21,8 @@ export const MeetingProvider = ({ children }) => {
   const [bgMain, setBgMain] = useState(
     "linear-gradient(250deg,rgb(92, 99, 121),rgb(197, 201, 214) 50%,rgb(75, 91, 143))"
   );
+  const [dark, setDark] = useState("dark");
+  const [tableClass, setTableClass] = useState("p-4 rounded-top bg-secondary")
 
   return (
     <MeetingContext.Provider
@@ -35,6 +37,10 @@ export const MeetingProvider = ({ children }) => {
         setBackground,
         bgMain,
         setBgMain,
+        dark,
+        setDark,
+        tableClass,
+        setTableClass
       }}
     >
       {children}
