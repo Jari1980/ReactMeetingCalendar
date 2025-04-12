@@ -4,12 +4,14 @@ import { useForm } from "react-hook-form";
 import meetingLevel from "../assets/data/meetingLevel";
 import meetings from "../assets/data/meetings";
 import axios from "axios";
+import "../stylesheet.css";
 
 const MeetingForm = () => {
   const { scheduledMeetings, setMeetings } = useMeetingContext();
   const { uppdateMeeting, setUppdateMeeting } = useMeetingContext();
   const [counter, setCounter] = useState(2);
   const { logged, setLogged } = useMeetingContext();
+  const {tableClass, setTableClass} = useMeetingContext();
 
   console.log(uppdateMeeting.title);
 
@@ -181,6 +183,16 @@ const MeetingForm = () => {
   };
 
   function cancelEdit() {
+    setUppdateMeeting({
+      uppdate: false,
+      id: "",
+      title: "",
+      date: "",
+      time: "",
+      level: "",
+      participants: "",
+      description: "",
+    });
     reset(uppdateMeeting);
   }
 
@@ -193,14 +205,14 @@ const MeetingForm = () => {
       className="container mt-5 d-flex justify-content-center"
       style={{ height: "auto" }}
     >
-      <div className="p-4 rounded-top bg-secondary">
+      <div className={tableClass}>
         <h1 className="text-center mb-4">
           {!uppdateMeeting.uppdate ? "Schedule a new meeting" : "Edit Meeting"}
         </h1>
         <form onSubmit={handleSubmit(onSubmit)} className="row g-3">
           <div className="col-12">
             <label htmlFor="title" className="form-label">
-              Meeting Title
+              <b>Meeting Title</b>
             </label>
             <input
               id="title"
@@ -215,7 +227,7 @@ const MeetingForm = () => {
 
           <div className="col-6">
             <label htmlFor="date" className="form-label">
-              Meeting Date
+              <b>Meeting Date</b>
             </label>
             <input
               id="date"
@@ -231,7 +243,7 @@ const MeetingForm = () => {
 
           <div className="col-6">
             <label htmlFor="time" className="form-label">
-              Meeting Time
+              <b>Meeting Time</b>
             </label>
             <input
               id="time"
@@ -247,7 +259,7 @@ const MeetingForm = () => {
 
           <div className="col-12">
             <label htmlFor="level" className="form-label">
-              Meeting Level
+              <b>Meeting Level</b>
             </label>
             <select
               id="level"
@@ -270,7 +282,7 @@ const MeetingForm = () => {
 
           <div className="col-12">
             <label htmlFor="participants" className="form-label">
-              Participants
+              <b>Participants</b>
             </label>
             <input
               id="participants"
@@ -291,7 +303,7 @@ const MeetingForm = () => {
 
           <div className="col-12">
             <label htmlFor="description" className="form-label">
-              Description
+              <b>Description</b>
             </label>
             <textarea
               id="description"
@@ -311,14 +323,14 @@ const MeetingForm = () => {
           </div>
 
           <div className="text-center">
-            <button type="submit" className="btn btn-primary">
+            <button type="submit" className="submitMeetingButton">
               {!uppdateMeeting.uppdate ? "+ Create Meeting" : "EditMeeting"}
             </button>
             {!uppdateMeeting.uppdate ? (
               ""
             ) : (
               <button
-                className="btn btn-danger"
+                className="meetingCancelDelete"
                 style={{ marginLeft: "20px" }}
                 onClick={() => cancelEdit()}
               >

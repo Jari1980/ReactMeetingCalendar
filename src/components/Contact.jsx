@@ -20,12 +20,12 @@ const Contact = () => {
           email: event.currentTarget.elements.formEmail.value,
           broccoli: event.currentTarget.elements.formCheckbox.checked,
         },
-        /*{
+        {
           auth: {
             username: localStorage.getItem("username"),
             password: localStorage.getItem("password"),
           },
-        }*/)
+        })
         event.target.reset()
         alert("Thanks for the message")
         }

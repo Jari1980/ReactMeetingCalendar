@@ -25,9 +25,50 @@ h1:hover {
 }
 
 .extButton {
-align-items: center;
+  align-items: center;
   background-image: linear-gradient(110deg, #9561b93d, #5b42f3 50%, #629da1);
   border-radius: 15px;
   font-size: large;
   color: bisque;
+}
+
+.submitMeetingButton {
+  align-items: center;
+  background-image: linear-gradient(3200deg, #cbcecb3d, #1a8a0c 50%, #629da1);
+  border-radius: 15px;
+  font-size: large;
+  color: bisque;
+  margin-bottom: 30px;
+}
+
+.submitMeetingButton:hover {
+  background-image: linear-gradient(3200deg, #cbcecb3d, #b2c2b0 50%, #39c071);
+  color: white;
+}
+
+.editMeetingButton {
+  align-items: center;
+  background-image: linear-gradient(3200deg, #2422963d, #4749a1 50%, #629da1);
+  border-radius: 15px;
+  font-size: large;
+  color: bisque;
+}
+
+.editMeetingButton:hover {
+  background-image: linear-gradient(3200deg, #2422963d, #8a8ab1 50%, #629da1);
+  color: white;
+}
+
+.meetingCancelDelete {
+  align-items: center;
+  background-image: linear-gradient(3200deg, #cbcecb3d, #ac449a 50%, #629da1);
+  border-radius: 15px;
+  font-size: large;
+  color: bisque;
+  margin-left: 20px;
+}
+
+.meetingCancelDelete:hover {
+  background-image: linear-gradient(3200deg, #cbcecb3d, #db25bd 50%, #629da1);
+  color: white;
 }

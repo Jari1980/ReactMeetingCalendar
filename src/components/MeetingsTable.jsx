@@ -10,6 +10,7 @@ const MeetingsTable = () => {
   const { scheduledMeetings, setMeetings } = useMeetingContext();
   const { uppdateMeeting, setUppdateMeeting } = useMeetingContext();
   const { logged, setLogged } = useMeetingContext();
+  const {dark, setDark} = useMeetingContext();
 
   const deleteMeeting = async (id) => {
     //let filtered = scheduledMeetings.filter(element => element.id !== id) //Used when running local meeting list
@@ -65,7 +66,7 @@ const MeetingsTable = () => {
 
   return (
     <div className="container d-flex justify-content-center">
-      <Table striped bordered hover variant="dark">
+      <Table striped bordered hover variant={dark}>
         <thead>
           <tr>
             <th>#</th>
@@ -87,30 +88,16 @@ const MeetingsTable = () => {
               <td>{item.level}</td>
               <td>
                 <Button
-                  style={{ marginRight: "20px" }}
+                  className="editMeetingButton"
                   onClick={() => editMeeting(item.id)}
                 >
-                  <img
-                    src={Edit}
-                    style={{
-                      width: "20px",
-                      height: "20px",
-                      paddingBottom: "4px",
-                    }}
-                  ></img>
+                  Edit
                 </Button>
                 <Button
-                  style={{ backgroundColor: "red" }}
+                  className="meetingCancelDelete"
                   onClick={() => deleteMeeting(item.id)}
                 >
-                  <img
-                    src={Delete}
-                    style={{
-                      width: "20px",
-                      height: "20px",
-                      paddingBottom: "4px",
-                    }}
-                  ></img>
+                  Delete
                 </Button>
               </td>
             </tr>

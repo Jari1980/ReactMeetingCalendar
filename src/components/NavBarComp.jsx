@@ -6,18 +6,21 @@ import { useMeetingContext } from "./context";
 const NavBarComp = () => {
   const {logged, setLogged} = useMeetingContext();
   const {background, setBackground} = useMeetingContext();
-  const [dark, setDark] = useState("dark");
+  const {dark, setDark} = useMeetingContext();
   const {bgMain, setBgMain} = useMeetingContext();
+  const {tableClass, setTableClass} = useMeetingContext();
 
   function handleClick(){
     if(dark === "dark"){
       setBackground("#8496a9")   //("#f8f9fa")
       setDark("light")
+      setTableClass("p-4 rounded-top bg-light")
       setBgMain("linear-gradient(250deg,rgb(117, 143, 231), rgb(221, 225, 235) 50%,rgb(202, 206, 219))")
     }
     else{
       setBackground("#212529")
       setDark("dark")
+      setTableClass("p-4 rounded-top bg-secondary")
       setBgMain("linear-gradient(250deg,rgb(92, 99, 121),rgb(197, 201, 214) 50%,rgb(75, 91, 143))")
     }
   }
