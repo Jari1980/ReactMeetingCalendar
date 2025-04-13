@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 
 
-import broccoli2 from "/src/assets/images/broccoli2.jpg";
+import broccoli2 from "../assets/images/broccoli2.jpg";
 
 import { useMeetingContext } from "./context";
 import "../stylesheet.css";
