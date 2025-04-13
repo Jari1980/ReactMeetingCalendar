@@ -8,6 +8,7 @@ import "../stylesheet.css";
 
 const Contact = () => {
   const {bgMain, setBgMain} = useMeetingContext();
+  const { logged, setLogged } = useMeetingContext();
 
     
     function handleSubmit(event) {
@@ -57,9 +58,13 @@ const Contact = () => {
           <Form.Group className="mb-3" controlId="formCheckbox">
             <Form.Check type="checkbox" label="I love Broccoli" />
           </Form.Group>
+          {logged ?
           <Button variant="primary" type="submit" className="extButton">
             Send me a mail
           </Button>
+          :
+          <h5>You need to log in in order to use this feature</h5>
+          }
         </Form>
       </Container>
       </div>
