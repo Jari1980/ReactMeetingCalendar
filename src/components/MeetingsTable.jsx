@@ -5,6 +5,7 @@ import { useMeetingContext } from "./context";
 import Edit from "../assets/images/Edit.png";
 import Delete from "../assets/images/Delete.png";
 import axios from "axios";
+import ApiUrl from "../assets/Url/ApiUrl";
 
 const MeetingsTable = () => {
   const { scheduledMeetings, setMeetings } = useMeetingContext();
@@ -19,7 +20,8 @@ const MeetingsTable = () => {
     if (logged) {
       try {
         const response = await axios.delete(
-          `http://localhost:8080/api/v1/project/meetings/delete?id=${id}`,
+          //`http://localhost:8080/api/v1/project/meetings/delete?id=${id}`,
+          `${ApiUrl}` + `api/v1/project/meetings/delete?id=${id}`,
           {
             method: "DELETE",
             mode: "cors",
@@ -31,7 +33,8 @@ const MeetingsTable = () => {
         );
         if (response.status === 200) {
           axios
-            .get("http://localhost:8080/api/v1/project/meetings", {
+            //.get("http://localhost:8080/api/v1/project/meetings", {
+            .get(`${ApiUrl}` + "api/v1/project/meetings", {
               auth: {
                 username: localStorage.getItem("username"),
                 password: localStorage.getItem("password"),

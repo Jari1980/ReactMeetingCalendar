@@ -5,6 +5,7 @@ import meetingLevel from "../assets/data/meetingLevel";
 import meetings from "../assets/data/meetings";
 import axios from "axios";
 import "../stylesheet.css";
+import ApiUrl from "../assets/Url/ApiUrl";
 
 const MeetingForm = () => {
   const { scheduledMeetings, setMeetings } = useMeetingContext();
@@ -29,7 +30,8 @@ const MeetingForm = () => {
   useEffect(() => {
     if (logged) {
       axios
-        .get("http://localhost:8080/api/v1/project/meetings", {
+        //.get("http://localhost:8080/api/v1/project/meetings", {
+          .get(`${ApiUrl}` + "api/v1/project/meetings", {  
           auth: {
             username: localStorage.getItem("username"),
             password: localStorage.getItem("password"),
@@ -49,7 +51,8 @@ const MeetingForm = () => {
       if (!uppdateMeeting.uppdate) {
         axios
           .post(
-            "http://localhost:8080/api/v1/project/meetings",
+            //"http://localhost:8080/api/v1/project/meetings",
+            `${ApiUrl}` + "api/v1/project/meetings",
             {
               title: data.title,
               date: data.date,
@@ -77,7 +80,8 @@ const MeetingForm = () => {
           )
           .then(() => {
             axios
-              .get("http://localhost:8080/api/v1/project/meetings", {
+              //.get("http://localhost:8080/api/v1/project/meetings", {
+                .get(`${ApiUrl}` + "api/v1/project/meetings", { 
                 auth: {
                   username: localStorage.getItem("username"),
                   password: localStorage.getItem("password"),
@@ -106,7 +110,8 @@ const MeetingForm = () => {
         try {
           const response = await axios
             .put(
-              "http://localhost:8080/api/v1/project/meetings/update",
+              //"http://localhost:8080/api/v1/project/meetings/update",
+              `${ApiUrl}` + "api/v1/project/meetings/update", 
               {
                 id: uppdateMeeting.id,
                 title: data.title,
@@ -125,7 +130,8 @@ const MeetingForm = () => {
             )
             .then(() => {
               axios
-                .get("http://localhost:8080/api/v1/project/meetings", {
+                //.get("http://localhost:8080/api/v1/project/meetings", {
+                  .get(`${ApiUrl}` + "api/v1/project/meetings", { 
                   auth: {
                     username: localStorage.getItem("username"),
                     password: localStorage.getItem("password"),
