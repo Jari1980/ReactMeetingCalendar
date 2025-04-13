@@ -23,7 +23,7 @@ const Home = () => {
     Navigate("/login")
   }
 
-  
+
   return (
     <div style={{backgroundImage:bgMain, width:"100vw", height:"100vh", overflow: "hidden"}}>
     <Container>
@@ -52,5 +52,6 @@ const Home = () => {
     </div>
   );
 };
+
 
 export default Home;
