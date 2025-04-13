@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 
 
-import broccoli2 from "../assets/images/broccoli2.jpg";
+//import broccoli2 from "../assets/images/broccoli2.jpg";
 
 import { useMeetingContext } from "./context";
 import "../stylesheet.css";
@@ -43,15 +43,19 @@ const Home = () => {
       <br />
       <br />
       <br />
-      <img
-        src={broccoli2}
-        style={{ display: "block", marginLeft: "auto", marginRight: "auto", mixBlendMode:"multiply" }}
-      ></img>
+      
       {!cookies.cookieConsent && <CookiesConsent />}
     </Container>
     </div>
   );
 };
+
+/*
+<img
+        src={broccoli2}
+        style={{ display: "block", marginLeft: "auto", marginRight: "auto", mixBlendMode:"multiply" }}
+      ></img>
+*/
 
 // Just some commented inorder to hopefully start new work flow
 export default Home;
