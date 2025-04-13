@@ -23,6 +23,7 @@ const About = () => {
             This is a Lexicon/Växjö school project done by me. What you see is a
             single page application SPA where front end is done with React JS
             and backend with Java Spring Rest API connected to mySQL database.
+            
           </p>
           <p>
             The main goal off this application is to have a super user who needs
