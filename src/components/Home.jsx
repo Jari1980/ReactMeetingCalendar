@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import broccoli2 from "../assets/images/broccoli2.jpg";
 import { useMeetingContext } from "./context";
 import "../stylesheet.css";
+import { useCookies } from "react-cookie";
+import CookiesConsent from "./CookiesConsent";
 
 
 const Home = () => {
@@ -11,6 +13,7 @@ const Home = () => {
   const { logged, setLogged } = useMeetingContext();
   const {background, setBackground} = useMeetingContext();
   const {bgMain, setBgMain} = useMeetingContext();
+  const [cookies] = useCookies(["cookieConsent"])
 
   function login(){
     Navigate("/login")
@@ -39,6 +42,7 @@ const Home = () => {
         src={broccoli2}
         style={{ display: "block", marginLeft: "auto", marginRight: "auto", mixBlendMode:"multiply" }}
       ></img>
+      {!cookies.cookieConsent && <CookiesConsent />}
     </Container>
     </div>
   );
