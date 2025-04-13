@@ -4,6 +4,7 @@ import axios from "axios";
 import { useMeetingContext } from "./context";
 import { Navigate, useNavigate } from "react-router-dom";
 import "../stylesheet.css";
+import ApiUrl from "../assets/Url/ApiUrl";
 
 const Login = () => {
   const {logged, setLogged} = useMeetingContext();
@@ -17,7 +18,8 @@ const Login = () => {
       password: event.currentTarget.elements.formPassword.value,
     };
     try {
-      axios.get("http://localhost:8080/api/v1/project/authenticate", {
+      //axios.get("http://localhost:8080/api/v1/project/authenticate", {
+      axios.get(`${ApiUrl}` + "api/v1/project/authenticate", {
         auth: {
           username: event.currentTarget.elements.formUserName.value,
           password: event.currentTarget.elements.formPassword.value,
@@ -47,6 +49,7 @@ const Login = () => {
     }
   }
 
+ 
 
   return (
     <>
