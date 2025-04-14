@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useMeetingContext } from './context';
 import "../stylesheet.css";
+import ApiUrl from "../assets/Url/ApiUrl";
 
 
 const Contact = () => {
@@ -15,7 +16,8 @@ const Contact = () => {
         event.preventDefault()
         try{
             axios
-        .post("http://localhost:8080/api/v1/project/contact", {
+        //.post("http://localhost:8080/api/v1/project/contact", {
+        .post(`${ApiUrl}` + "api/v1/project/contact", {
           name: event.currentTarget.elements.formName.value,
           message: event.currentTarget.elements.formMessage.value,
           email: event.currentTarget.elements.formEmail.value,
