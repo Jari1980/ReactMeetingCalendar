@@ -17,7 +17,7 @@ const Dashboard = () => {
     
     return (
         <>
-        <div style={{ display: "flex", height: "1200px"}}>
+        <div style={{ display: "flex"}}> 
         <aside
         style={{
           background: background,
@@ -86,7 +86,7 @@ const Dashboard = () => {
           </ul>
         </Nav>
       </aside>
-      <div style={{backgroundImage:bgMain, width:"100vw", height:"100vh", overflow: "hidden", marginLeft: "-2px"}}>
+      <div style={{backgroundImage:bgMain, width:"100vw", height:"100%", overflow: "hidden", marginLeft: "-2px"}}>
       <main style={{ flex:2, padding: "16px" }}>
         <Routes>
             <Route path='/' element={<DashHome/>}/>
