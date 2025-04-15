@@ -1,7 +1,7 @@
 <h1>Meeting Calendar UI</h1>
 <br/>
 <p>This is the frontend part, built with React Vite as a single page application SAP, as final project in Lexicon Växjö for fullstack developer focusing Java and React.</p>
-<p>The project wraps upp larger parts of content covered during the course and time I put into this project was around 3-4 weeks. Roughly 2.2 weeks for frontend, 1.2 weeks for backend and 1 day to move project to Azure, however I had plenty of help from previous workshops and looking back over past lecture material.</p>
+<p>The project wraps upp larger parts of content covered during the course and time I put into this project was around 3 weeks. Roughly 2 weeks for frontend, 1 weeks for backend and 1 day to move project to Azure, however I had plenty of help from previous workshops and looking back over past lecture material.</p>
 <br/>
 <p>Main idea for this UI is to look good, be functional and provide a user a dashboard with meeting data to work with, additionally I added contact and login feature and moved this to the cloud as extra.<p/>
 <br/>
